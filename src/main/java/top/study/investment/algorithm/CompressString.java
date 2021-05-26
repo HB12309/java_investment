@@ -18,17 +18,17 @@ public class CompressString {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i=0; i<charLength; i++) {
             int j = i+1;
-            // 最后一个了，还单着
+            // 最后一个了，还单着,就一个嘛说明
             if (i == charLength - 1) {
                 stringBuilder.append(chars[i]);
                 stringBuilder.append(1);
                 break;
             }
-//            if (j >= charLength) {
-//                break;
-//            }
+
+
             int count = 1;
-            while (chars[i] == chars[j]) {
+            // 边界问题
+            while (j<charLength && chars[i] == chars[j]) {
                 count++;
                 j++;
             }
@@ -47,7 +47,7 @@ public class CompressString {
     }
 
     public static void main(String[] args) {
-        String s = "aaabbcccca";
+        String s = "aaabb";
         String result = compressString(s);
         System.out.println(result);
     }
