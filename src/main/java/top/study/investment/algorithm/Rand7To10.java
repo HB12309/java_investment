@@ -1,5 +1,7 @@
 package algorithm;
 
+import util.NumberUtil;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -15,7 +17,7 @@ import java.util.Random;
  *
  * 该方法的作用是生成一个随机的int值，该值介于[0,n)的区间，也就是0到n之间的随机int值，包含0而不包含n。
  * 关于seed的坑，随机数的坑
- * @see tip.RandomTest
+ * @see util.NumberUtil
  *
  * leetcode原题，没懂。需要查询什么叫做拒绝采样
  *
@@ -59,7 +61,8 @@ public class Rand7To10 {
 
     public static void main(String[] args) {
         for (int i=0; i<100; i++) {
-            int result = rand10();
+//            int result = rand10();
+            int result = NumberUtil.getRandom(-9, 0);
             System.out.println(result);
         }
     }
