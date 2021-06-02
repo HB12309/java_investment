@@ -32,7 +32,7 @@ public class ReverseList {
      * @param listNode
      * @return
      */
-    private static List<Integer> linkedList2list(ListNode listNode) {
+    public static List<Integer> linkedList2list(ListNode listNode) {
         List<Integer> list = new ArrayList<Integer>();
         if (listNode == null) {
             return list;
@@ -91,7 +91,12 @@ public class ReverseList {
         return root;
     }
 
-
+    /**
+     * 2021年06月02日13:52:35
+     * 说：迭代形的 reverse 没做很好，需要理解这个。一定要理解，因为这是 base，后面进阶的都要用到这个方法
+     * @param listNode
+     * @return
+     */
     public static ListNode reverseList2(ListNode listNode) {
         if (listNode == null) {
             return listNode;
@@ -101,11 +106,8 @@ public class ReverseList {
 
         while (curr != null) {
             ListNode next = curr.next;
-
             curr.next = prev;
             curr = next;
-
-
             prev = curr;
             curr = curr.next;
         }

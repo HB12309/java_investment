@@ -13,26 +13,44 @@ import java.util.List;
 public class DeleteDuplicates {
     /**
      * 第一想法：while 扫描，本身有序，如果 value 和 next.value 相等，跳过；继续
+     * DeleteDuplicates: [1,1,2,3,4,4] -> [1,2,3,4]
+     *
+     * 2021年06月02日14:22:50
+     * 说：做减法就是麻烦，做加法看看吧。
+     * 用了20分钟（其中包含闲聊），
+     *
+     * 1、做加法果然更简单，主要是有对比的基准
+     * 2、ListNode result 可以：1、空的头结点。2、头结点也可用，都行，看方便。
+     * 3、做加法，主要是有一个 temp 来作为最后一个节点迭代
+     *
      */
-    public static ListNode deleteDuplicates(ListNode listNode) {
-        if (listNode == null) {
-            return null;
+    public static ListNode deleteDuplicates(ListNode head) {
+        // 边界
+        if (head == null || head.next == null) {
+            return head;
         }
 
-        if (listNode.next == null) {
-            return listNode;
+        int baseValue = head.val;
+        ListNode result = new ListNode(baseValue);
+        ListNode temp = result;
+
+        while (head != null) {
+            if (head.next == null) {
+                break;
+            }
+
+            if (baseValue != head.next.val) {
+                ListNode node = new ListNode(head.next.val);
+                // 因为比较完了，基准变了，要往下走了
+                baseValue = head.next.val;
+                // 接上
+                temp.next = node;
+                temp = node;
+            }
+            // 下一步
+            head = head.next;
         }
-
-        // 第一个
-        ListNode result = new ListNode();
-        result.val = listNode.val;
-        int tempVal = listNode.val;
-        while (listNode != null) {
-
-        }
-
-
-        return null;
+        return result;
     }
 
     /**
@@ -63,10 +81,10 @@ public class DeleteDuplicates {
     }
 
     public static void main(String[] args) {
-        List<Integer> list = Arrays.asList(1,1,1);
-        List<Integer> resultList = compressList(list);
-//        ListNode before = ReverseList.arrayList2linkedList(list);
-//        ListNode result = deleteDuplicates(before);
-        System.out.println(resultList);
+        List<Integer> list = Arrays.asList(1,2,3);
+//        List<Integer> resultList = compressList(list);
+        ListNode before = ReverseList.arrayList2linkedList(list);
+        ListNode result = deleteDuplicates(before);
+        System.out.println(result);
     }
 }
