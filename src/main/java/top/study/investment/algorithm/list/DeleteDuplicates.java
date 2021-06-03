@@ -80,6 +80,26 @@ public class DeleteDuplicates {
         return compressList;
     }
 
+    /**
+     * leetcode 答案
+     * @param head
+     * @return
+     * 相比于
+     * @see DeleteDuplicates#deleteDuplicates(ListNode) , 这里不需要 new node，而是通过 cur 直接 next下去
+     * 对噢，好简单~
+     */
+    public static ListNode deleteDuplicates3(ListNode head) {
+        ListNode cur = head;
+        while(cur != null && cur.next != null) {
+            if(cur.val == cur.next.val) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1,2,3);
 //        List<Integer> resultList = compressList(list);

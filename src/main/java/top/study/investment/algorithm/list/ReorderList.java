@@ -9,6 +9,7 @@ import java.util.List;
  * @Date 2021/6/2 10:49 上午
  * @Version 1.0
  * @see: leetcode 143
+ * https://leetcode-cn.com/problems/reorder-list/solution/zhong-pai-lian-biao-by-leetcode-solution/
  */
 public class ReorderList {
     /**
@@ -55,6 +56,35 @@ public class ReorderList {
             temp = after;
         }
         return result.next;
+    }
+
+    /**
+     * 1、真的可以 List<ListNode> list 这样啊。虽然浪费，但是也可以啊666
+     * 2、重排就好了啊
+     * @param head
+     */
+    public static void reorderList2(ListNode head) {
+        if (head == null) {
+            return;
+        }
+        List<ListNode> list = new ArrayList<ListNode>();
+        ListNode node = head;
+        while (node != null) {
+            list.add(node);
+            node = node.next;
+        }
+        int i = 0, j = list.size() - 1;
+        while (i < j) {
+            list.get(i).next = list.get(j);
+            i++;
+            if (i == j) {
+                break;
+            }
+            list.get(j).next = list.get(i);
+            j--;
+        }
+        // 最后一句忘了处理啦啊啊啊
+        list.get(i).next = null;
     }
 
     public static void main(String[] args) {

@@ -9,6 +9,7 @@ import java.util.List;
  * @Date 2021/6/2 3:39 下午
  * @Version 1.0
  * @see: leetcode 86
+ * https://leetcode-cn.com/problems/partition-list/
  */
 public class PartitionList {
     /**
@@ -25,9 +26,30 @@ public class PartitionList {
      * 再拼接数组，再拼接linked【已实现】
      *
      * 第三想法。。不知道，看答案吧
+     * 2021年06月03日11:10:40
+     * @see PartitionList#partitionList(List, int)
+     * 心里想法：第二天看答案，没想到也用了 small large 哈哈。和我写的上面的 [partitionList] 异曲同工之妙啊
+     * 哑巴节点是这样的。连接一下就好了嘛。。。再尾巴处理一下
      */
     private static ListNode partition(ListNode head, int x) {
-        return null;
+        ListNode small = new ListNode(0);
+        ListNode smallHead = small;
+        ListNode large = new ListNode(0);
+        ListNode largeHead = large;
+        while (head != null) {
+            if (head.val < x) {
+                small.next = head;
+                small = small.next;
+            } else {
+                large.next = head;
+                large = large.next;
+            }
+            head = head.next;
+        }
+        // 处理一下尾巴
+        large.next = null;
+        small.next = largeHead.next;
+        return smallHead.next;
     }
 
     /**

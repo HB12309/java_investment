@@ -9,6 +9,7 @@ import java.util.List;
  * @Date 2021/5/31 5:11 下午
  * @Version 1.0
  * 反转链表，数据结构看
+ * @see： leetcode206
  * @see ListNode
  */
 public class ReverseList {
@@ -94,22 +95,28 @@ public class ReverseList {
     /**
      * 2021年06月02日13:52:35
      * 说：迭代形的 reverse 没做很好，需要理解这个。一定要理解，因为这是 base，后面进阶的都要用到这个方法
-     * @param listNode
+     * @param head
      * @return
+     *
+     * 2021年06月02日20:29:29说对噢，好简单，反转指针，一个 prev 一个 curr，直接反转就好了，因为 linked最后一定是null
+     * 这是经典的。
+     * 所以我觉得：linked经典的就是 reverse 回文、还有和数组的各种操作，
      */
-    public static ListNode reverseList2(ListNode listNode) {
-        if (listNode == null) {
-            return listNode;
+    public static ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
         }
         ListNode prev = null;
-        ListNode curr = listNode;
+        ListNode curr = head;
 
         while (curr != null) {
-            ListNode next = curr.next;
+            // 下一个要用的
+            ListNode nextTemp = curr.next;
+            // 反转
             curr.next = prev;
-            curr = next;
+            // prev curr 各自往后面挪一个
             prev = curr;
-            curr = curr.next;
+            curr = nextTemp;
         }
 
         return prev;

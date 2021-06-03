@@ -9,6 +9,7 @@ import java.util.List;
  * @Author qhb
  * @Date 2021年06月02日13:58:05
  * @Version 1.0
+ * @see: leetcode
  * @see DeleteDuplicates
  */
 public class DeleteDuplicates2 {
@@ -56,11 +57,33 @@ public class DeleteDuplicates2 {
         return compressList;
     }
 
+    public static ListNode deleteDuplicates(ListNode head) {
+        if (head == null) {
+            return head;
+        }
+        ListNode dummyNode = new ListNode(0, head);
+        ListNode cur = dummyNode;
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == cur.next.next.val) {
+                int x = cur.next.val;
+                // 把 x 拎出来，是为了把 [1,1,1] 去掉，而不是剩一个[1]
+                while (cur.next != null && cur.next.val == x) {
+                    cur.next = cur.next.next; // 没有下一步，而是原地打转噢。cur没变噢
+                }
+            } else {
+                cur = cur.next; // 下一步
+            }
+        }
+
+        return dummyNode.next;
+
+    }
+
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1,1,1,2,3,4,4);
-        List<Integer> resultList = removeSameValueInList(list);
-//        ListNode before = ReverseList.arrayList2linkedList(list);
-//        ListNode result = deleteDuplicates(before);
-        System.out.println(resultList);
+//        List<Integer> resultList = removeSameValueInList(list);
+        ListNode before = ReverseList.arrayList2linkedList(list);
+        ListNode result = deleteDuplicates(before);
+        System.out.println(result);
     }
 }

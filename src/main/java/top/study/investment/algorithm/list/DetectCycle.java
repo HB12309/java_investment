@@ -1,9 +1,15 @@
 package algorithm.list;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @Author qhb
  * @Date 2021/6/2 4:35 下午
  * @Version 1.0
+ * {@link CycleList#getCycleIndex(ListNode)}
+ * @see CycleList#getCycleIndex(ListNode)
+ * https://leetcode-cn.com/problems/linked-list-cycle-ii
  */
 public class DetectCycle {
     /**
@@ -12,12 +18,49 @@ public class DetectCycle {
      * @param head
      * @return
      */
-    private static int deleteCycle(ListNode head) {
-        if (head == null || head.next == null) {
-            return 0;
+    private static ListNode deleteCycle(ListNode head) {
+        ListNode pos = head;
+        Set<ListNode> visited = new HashSet<>();
+        while (pos != null) {
+            if (visited.contains(pos)) {
+                return pos;
+            } else {
+                visited.add(pos);
+            }
+
+            pos = pos.next;
         }
 
-        return 0;
+        return null;
+    }
+
+    /**
+     * 这个很精妙啊。。。
+     * @param head
+     * @return
+     */
+    public static ListNode detectCycle2(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (true) {
+            // 没有环，走人
+            if (fast == null || fast.next == null) {
+                return null;
+            }
+            fast = fast.next.next;
+            slow = slow.next;
+            // 一定会相遇的
+            if (fast == slow) {
+                break;
+            }
+        }
+        // 构建第二轮开始
+        fast = head;
+        // 第二轮相遇，step步进一致，
+        while (slow != fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
     }
 
     public static void main(String[] args) {

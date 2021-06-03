@@ -53,6 +53,41 @@ public class RotateRight {
         return resultList;
     }
 
+    /**
+     * 2021年06月03日11:16:37
+     * @see RotateRight##rotateRightList(List, int)
+     * 第二天翻答案，比我写的简单很多，不需要各种容器，而是通过闭合为环，再把环断开
+     * @param head
+     * @param k
+     * @return
+     */
+    public static ListNode rotateRight2(ListNode head, int k) {
+        if (k == 0 || head == null || head.next == null) {
+            return head;
+        }
+        int n = 1;
+        ListNode iter = head;
+        while (iter.next != null) {
+            iter = iter.next;
+            n++;
+        }
+        // add 就是 step 啊。步进的次数
+        int add = n - k % n;
+        // 这里牛逼，如果发现和长度一样，直接不需要动作，直接返回
+        if (add == n) {
+            return head;
+        }
+        // 开始步进，add 次数
+        iter.next = head;
+        while (add-- > 0) {
+            iter = iter.next;
+        }
+        // 找到头结点，再断开
+        ListNode ret = iter.next;
+        iter.next = null;
+        return ret;
+    }
+
     public static void main(String[] args) {
         List<Integer> resultList = rotateRightList(Arrays.asList(11,22,33,44), 2);
         System.out.println(resultList.size());
