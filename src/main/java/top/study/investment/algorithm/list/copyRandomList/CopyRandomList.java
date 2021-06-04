@@ -1,4 +1,4 @@
-package algorithm.list;
+package algorithm.list.copyRandomList;
 
 import java.util.HashMap;
 
