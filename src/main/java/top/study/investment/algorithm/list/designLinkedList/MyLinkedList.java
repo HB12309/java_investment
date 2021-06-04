@@ -4,6 +4,9 @@ package algorithm.list.designLinkedList;
  * 2021年06月04日09:28:23
  * 1、原来 head size 和 {@link ListNode} 是要分开设计的啊，我日了
  * 2、原来可以设计辅助呢。。
+ *
+ * 2021年06月04日14:03:21
+ * 继续加把料，看吧，Java 源码里，这种设计一大把，看{@link java.util.LinkedList } 里面啊。size first last 等等
  */
 class MyLinkedList {
     int size;
