@@ -1,5 +1,8 @@
 package algorithm.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Author qhb
  * @Date 2021/6/4 3:53 下午
@@ -20,12 +23,31 @@ public class TreeUtil {
         b.left = e;
 
         return root;
-//        TreeNode temp = root;
-//        for (int i = 0; i < array.length; i++) {
-//            if (temp.val == -999) {
-//                temp.val = array[i];
-//            }
-//
-//        }
+    }
+
+    public static Node buildNTree() {
+        Node root = new Node(1);
+        Node a = new Node(2);
+        Node b = new Node(3);
+        Node c = new Node(4);
+        Node d = new Node(5);
+        Node e = new Node(6);
+        Node f = new Node(7);
+        Node g = new Node(8);
+        Node h = new Node(9);
+
+        List<Node> abc = new ArrayList<>();
+        abc.add(a); abc.add(b); abc.add(c);
+        root.children = abc;
+
+        List<Node> de = new ArrayList<>();
+        de.add(d); de.add(e);
+        a.children = de;
+
+        List<Node> fgh = new ArrayList<>();
+        fgh.add(f); fgh.add(g); fgh.add(h);
+        b.children = fgh;
+
+        return root;
     }
 }
